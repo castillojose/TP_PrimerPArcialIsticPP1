@@ -1,28 +1,34 @@
 <?php
-$miObjeto = new stdClass();
-$miObjeto->nombre = $_GET['nombre'];
-$miObjeto->contraseña = $_GET['contraseña'];
 
-$archivo = fopen ('registro.txt', 'r');
-while(!feof ($arcivo))
+$Bandera=0;
+$nombreUsuario = $_GET['nombre'];
+$contraseñaUsuario = $_GET['contraseña'];
+
+
+$archivo = fopen ('registro.txt','r');
+while(!feof ($archivo))
 {
 	$objeto = json_decode(fgets($archivo));
 
-
-    if ($miObjeto->nombre == $objeto->nombre && $miObjeto->contraseña == $objeto->contraseña) 
+    if ($objeto->nombre == $nombreUsuario && $objeto->contraseña == $contraseñaUsuario) 
     {
-        header("Location: ok.php");
-		fclose($archivo);
-	}
-	else
-	{
-		header("Location: no.php");
-		fclose($archivo);
-	}
+    	$Bandera=1;
+    }
+        
 }
 
-fclose($archivo);
+if ($Bandera==1)
+{
+	header("Location: ok.php");
+	
+}
+else
+{
+    header("Location: no.php");
+    
+		
+}
+  
+ fclose($archivo);
+
 ?>
-   
-
-

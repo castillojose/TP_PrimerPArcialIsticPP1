@@ -5,6 +5,6 @@ $miObjeto->contraseña = $_GET['contraseña'];
 
 $archivo = fopen('registro.txt', 'a');
 fwrite($archivo, json_encode($miObjeto)."\n");
-header("Location: OK.php");
+header("Location: ok.php");
 fclose($archivo);
 ?>

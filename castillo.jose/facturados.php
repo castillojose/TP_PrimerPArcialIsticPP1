@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
 
-    <title>Estacionamiento XXI</title>
+    <title>ESTACIONAMIENTO XXI</title>
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap.min.css" rel="stylesheet">
@@ -31,13 +31,13 @@
               <a class="nav-link" href="registro.php">Sign up <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="login.php">Sign in <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="login.php">Sign in<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link disabled" href="cargarvehiculo.php">Ingresar vehiculo <span class="sr-only">(current)</span></a>
+              <a class="nav-link disabled" href="cargarvehiculo.php">Ingresar vehiculo<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="facturar.php">Facturar<span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="facturar.php">Facturar <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
               <a class="nav-link" href="facturados.php">Facturados <span class="sr-only">(current)</span></a>
@@ -54,24 +54,67 @@
     <!-- Begin page content -->
     <main role="main" class="container">
 
-      <h1>Iniciar Sesion</h1>
-        <form action="hacerLogin.php">
-          <p> Ingrese su nombre y contraseña </p>
-          <br>
-              Nombre:<br>
-              <input type="text" name="nombre" value="">
-              <br>
-              Contraseña:<br>
-              <input type="text" name="contraseña" value="">
-              <br><br>
-              <input type="submit" value="Ingresar">
-              
-        </form> 
+    <style>
+   
+    th 
+    {
+      color:black;
+      background-color: lightgreen;
+    }
+    td {color:black;}
+    table,th,td 
+    {
+     border: 6px solid black;
+    text-align: center;
+    }
+
+    </style>
+
+
+
+<table style="width:50%">
+
+       <tr>
+            <th>Vehiculo</th>
+            <th>F/H Ingreso</th>
+            <th>F/H Salida</th>
+            <th>Total Cobrado</th>
+          </tr>
+
+
+      
+<?php
+
+  $totalFacturado = 0;
+  date_default_timezone_set('America/Argentina/Buenos_Aires');
+
+
+
+    $archivo = fopen("facturados.txt", "r");
+    while(!feof($archivo)) 
+    {
+      $objeto = json_decode(fgets($archivo));
+      if ($objeto != "") 
+      {
+        echo "<tr>";
+          echo "<td>".$objeto->Vehiculo."</td>   <td>".$objeto->fechaEntrada."</td>   <td>".$objeto->fechaSalida."</td>   <td>".$objeto->importe."</td>";
+        echo "</tr>";
+        echo "</table>";
+
+
+        $totalFacturado = $totalFacturado + $objeto->importe;
+      }
+    }
+
+    echo "<h2>***************** totalFacturado: $".$totalFacturado."</h2>";
+    fclose($archivo);
+  ?>
+      
     </main>
 
     <footer class="footer">
       <div class="container">
-        
+      
       </div>
     </footer>
 

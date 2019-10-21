@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
 
-    <title>Estacionamiento XXI</title>
+    <title>ESTACIONAMIENTO XXI</title>
 
     <!-- Bootstrap core CSS -->
     <link href="bootstrap.min.css" rel="stylesheet">
@@ -31,13 +31,13 @@
               <a class="nav-link" href="registro.php">Sign up <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="login.php">Sign in <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="login.php">Sign in<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link disabled" href="cargarvehiculo.php">Ingresar vehiculo <span class="sr-only">(current)</span></a>
+              <a class="nav-link disabled" href="cargarvehiculo.php">Ingresar vehiculo<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="facturar.php">Facturar<span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="facturar.php">Facturar <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
               <a class="nav-link" href="facturados.php">Facturados <span class="sr-only">(current)</span></a>
@@ -53,20 +53,28 @@
 
     <!-- Begin page content -->
     <main role="main" class="container">
+     <form action="hacerfacturar.php"> 
+      <h1>Factura</h1>
 
-      <h1>Iniciar Sesion</h1>
-        <form action="hacerLogin.php">
-          <p> Ingrese su nombre y contraseña </p>
-          <br>
-              Nombre:<br>
-              <input type="text" name="nombre" value="">
-              <br>
-              Contraseña:<br>
-              <input type="text" name="contraseña" value="">
-              <br><br>
-              <input type="submit" value="Ingresar">
-              
-        </form> 
+      <?php
+
+          date_default_timezone_set('America/Argentina/Buenos_Aires');
+        
+          $patente = $_GET["patente"];
+          $cobrar = $_GET['cobrar'];
+          $ingreso = $_GET['ingreso'];
+          $salida = $_GET['salida'];
+
+          echo "Vehiculo: ".$patente."<br>";
+          echo "Hora de ingreso: ".date("d-m-y H:i",$ingreso)."<br>";
+          echo "Hora de salida: ".date("d-m-y H:i",$salida)."<br>";
+          echo "Cobrar: $".$cobrar."<br>";
+        
+
+          ?>
+
+          <a href="index.php"><h4>inicio</h4></a>
+        
     </main>
 
     <footer class="footer">
